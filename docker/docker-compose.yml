@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  profile_server:
+    image : profile_server:latest
+    build:
+      context: ../
+      dockerfile: ./docker/Dockerfile
+    ports:
+      - "8081:80"
+    volumes:
+      - D:\docker\volume:/vol
+    container_name: AiProfileAPI
+    privileged: true
+    restart: unless-stopped
+    #아래 두 옵션은 서버 계속 돌아가게 설정한 후 제거, 지금은 실행되는게 없으므로 생성 후 바로 exit 0 뱉으며 정상 종료됨.
+    stdin_open: true
+    tty: true
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [gpu]
