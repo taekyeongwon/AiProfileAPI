@@ -9,6 +9,7 @@ services:
       - "8081:80"
     volumes:
       - D:\docker\volume:/vol
+      - ../:/root/AiProfileAPI
     container_name: AiProfileAPI
     privileged: true
     restart: unless-stopped
