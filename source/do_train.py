@@ -36,10 +36,14 @@ def train(config):
 
     return args
 
-accelerate_args = train(accelerate_conf)
-train_args = train(train_conf)
-final_args = f"accelerate launch {accelerate_args} train_network.py {train_args}"
-
-os.chdir(repo_dir)
-print(f"execute time :: {now.strftime('%Y-%m-%d %H:%M:%S')}")
-subprocess.run(final_args, shell=True)
+def execute():
+    print("do train start.....\n")
+    accelerate_args = train(accelerate_conf)
+    train_args = train(train_conf)
+    final_args = f"accelerate launch {accelerate_args} train_network.py {train_args}"
+    os.chdir(repo_dir)
+    print(f"train_network.py execute time :: {now.strftime('%Y-%m-%d %H:%M:%S')}")
+    try:
+        subprocess.run(final_args, shell=True, check=True)
+    except:
+        raise Exception('training error')

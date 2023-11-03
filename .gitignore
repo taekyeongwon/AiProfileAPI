@@ -6,4 +6,6 @@ venv
 build
 .vscode
 wandb
-train_data/
+train_dir/
+output_dir/
+logs/

@@ -26,10 +26,10 @@ debug_dataset = false
 vae_batch_size = 4
 
 [training_arguments]
-output_dir = "/root/output_dir"
+output_dir = "/root/AiProfileAPI/output_dir"
 output_name = "lora_trained_model"
 save_precision = "fp16"
-train_batch_size = 2
+train_batch_size = 1
 max_token_length = 225
 mem_eff_attn = false
 xformers = true
@@ -40,7 +40,7 @@ gradient_checkpointing = false
 gradient_accumulation_steps = 1
 mixed_precision = "fp16"
 clip_skip = 2
-logging_dir = "/root/logs"
+logging_dir = "/root/AiProfileAPI/logs"
 log_prefix = "lora_trained_model"
 lowram = false
 no_half_vae = true
