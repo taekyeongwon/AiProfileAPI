@@ -1,7 +1,6 @@
-import os
-import subprocess
+import os, subprocess
 from datetime import datetime
-import path
+from util import path, util
 
 now = datetime.now()
 
@@ -11,30 +10,14 @@ accelerate_conf = {
 }
 
 train_conf = {
-    "dataset_config" : path.dataset_config,
+    #"dataset_config" : path.dataset_config,
     "config_file" : path.config_file
 }
 
-def train(config):
-    args = ""
-    for k, v in config.items():
-        if k.startswith("_"):
-            args += f'"{v}" '
-        elif isinstance(v, str):
-            args += f'--{k}="{v}" '
-        elif isinstance(v, bool) and v:
-            args += f"--{k} "
-        elif isinstance(v, float) and not isinstance(v, bool):
-            args += f"--{k}={v} "
-        elif isinstance(v, int) and not isinstance(v, bool):
-            args += f"--{k}={v} "
-
-    return args
-
 def execute():
     print("\ndo train start.....-------------------------------------------------\n")
-    accelerate_args = train(accelerate_conf)
-    train_args = train(train_conf)
+    accelerate_args = util.train(accelerate_conf)
+    train_args = util.train(train_conf)
     final_args = f"accelerate launch {accelerate_args} train_network.py {train_args}"
     os.chdir(path.repo_dir)
     print(f"train_network.py execute time :: {now.strftime('%Y-%m-%d %H:%M:%S')}")
