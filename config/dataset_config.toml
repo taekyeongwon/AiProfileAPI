@@ -16,5 +16,5 @@ flip_aug = false
 color_aug = false
 
   [[datasets.subsets]]
-  image_dir = "/root/AiProfileAPI/train_data"
-  num_repeats = 40
+  image_dir = "/root/AiProfileAPI/train_dir"
+  num_repeats = 20

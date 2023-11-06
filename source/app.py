@@ -7,4 +7,4 @@ try:
 except Exception as e:
     print(e)
 else:
-    print("train done")
+    print("\ntraining done.")

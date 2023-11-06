@@ -1,23 +1,18 @@
 import os
 import subprocess
 from datetime import datetime
+import path
 
 now = datetime.now()
 
-root_dir = "/root/"
-repo_dir = os.path.join(root_dir, "AiProfileAPI")
-accelerate_config = repo_dir + "/config/config.yaml"
-config_file = repo_dir + "/config/config_file.toml" #@param {type:'string'}
-dataset_config = repo_dir + "/config/dataset_config.toml" #@param {type:'string'}
-
 accelerate_conf = {
-    "config_file" : accelerate_config,
+    "config_file" : path.accelerate_config,
     "num_cpu_threads_per_process" : 1,
 }
 
 train_conf = {
-    "dataset_config" : dataset_config,
-    "config_file" : config_file
+    "dataset_config" : path.dataset_config,
+    "config_file" : path.config_file
 }
 
 def train(config):
@@ -37,13 +32,13 @@ def train(config):
     return args
 
 def execute():
-    print("do train start.....\n")
+    print("\ndo train start.....-------------------------------------------------\n")
     accelerate_args = train(accelerate_conf)
     train_args = train(train_conf)
     final_args = f"accelerate launch {accelerate_args} train_network.py {train_args}"
-    os.chdir(repo_dir)
+    os.chdir(path.repo_dir)
     print(f"train_network.py execute time :: {now.strftime('%Y-%m-%d %H:%M:%S')}")
     try:
         subprocess.run(final_args, shell=True, check=True)
     except:
-        raise Exception('training error')
+        raise Exception('training error !!!')

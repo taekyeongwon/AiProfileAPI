@@ -1,7 +1,7 @@
 [model_arguments]
 v2 = false
 v_parameterization = false
-pretrained_model_name_or_path = "runwayml/stable-diffusion-v1-5"
+pretrained_model_name_or_path = "/root/AiProfileAPI/pretrained_model/chilloutmix_NiPrunedFp16Fix.safetensors"
 
 [additional_network_arguments]
 no_metadata = false
