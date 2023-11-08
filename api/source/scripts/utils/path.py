@@ -1,9 +1,9 @@
 import os
 
-root_dir = "/root/"
-repo_dir = os.path.join(root_dir, "AiProfileAPI")
-finetune_dir = repo_dir + "/finetune"
-train_dir = repo_dir + "/train_dir"
+root_dir = "/root/AiProfileAPI"
+repo_dir = os.path.join(root_dir, "api")
+finetune_dir = root_dir + "/finetune"
+train_data_dir = repo_dir + "/train_data_dir"
 
 config_dir = repo_dir + "/config_finetune"
 accelerate_config = config_dir + "/config.yaml"

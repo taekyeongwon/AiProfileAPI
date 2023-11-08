@@ -1,7 +1,7 @@
 [model_arguments]
 v2 = false
 v_parameterization = false
-pretrained_model_name_or_path = "/root/AiProfileAPI/pretrained_model/chilloutmix_NiPrunedFp16Fix.safetensors"
+pretrained_model_name_or_path = "/root/AiProfileAPI/api/pretrained_model/chilloutmix_NiPrunedFp16Fix.safetensors"
 
 [additional_network_arguments]
 no_metadata = false
@@ -22,9 +22,9 @@ lr_warmup_steps = 0
 
 [dataset_arguments]
 debug_dataset = false
-in_json = "/root/AiProfileAPI/config_finetune/meta_lat.json"
-train_data_dir = "/root/AiProfileAPI/train_dir"
-dataset_repeats = 20
+in_json = "/root/AiProfileAPI/api/config_finetune/meta_lat.json"
+train_data_dir = "/root/AiProfileAPI/api/train_data_dir"
+dataset_repeats = 40
 shuffle_caption = true
 keep_tokens = 0
 resolution = "512,512"
@@ -36,8 +36,8 @@ token_warmup_min = 1
 token_warmup_step = 0
 
 [training_arguments]
-output_dir = "/root/AiProfileAPI/output_dir"
-output_name = "chillout_5000_2"
+output_dir = "/root/AiProfileAPI/api/output_dir"
+output_name = "chillout_5000_test"
 save_precision = "fp16"
 save_every_n_epochs = 1
 train_batch_size = 1
@@ -51,8 +51,8 @@ gradient_checkpointing = false
 gradient_accumulation_steps = 1
 mixed_precision = "fp16"
 clip_skip = 2
-logging_dir = "/root/AiProfileAPI/logs"
-log_prefix = "chillout_5000_2"
+logging_dir = "/root/AiProfileAPI/api/logs"
+log_prefix = "chillout_5000_test"
 lowram = false
 
 [sample_prompt_arguments]
