@@ -4,14 +4,14 @@ from scripts.utils import path, util
 #5.1 Model Config
 v2 = False  # @param {type:"boolean"}
 v_parameterization = False  # @param {type:"boolean"}
-project_name = "chillout_5000_test"  # @param {type:"string"}
+project_name = "chillout_1000"  # @param {type:"string"}
 pretrained_model_name_or_path = path.model_dir  # @param {type:"string"}
 vae = ""  # @param {type:"string"}
 output_dir = path.output_dir  # @param {'type':'string'}
 train_data_dir = path.train_data_dir
 
 #5.2 Dataset Config
-dataset_repeats = 40  # @param {type:"number"}
+dataset_repeats = 20  # @param {type:"number"}
 in_json = path.latents_file  # @param {type:"string"}
 resolution = "512,512" # @param ["512,512", "768,768"]
 keep_tokens = 0  # @param {type:"number"}
@@ -94,9 +94,9 @@ def model_config():
     global output_dir
     global train_data_dir
 
-    project_name = "chillout_5000_test"  # @param {type:"string"}
-    output_dir = path.output_dir  # @param {'type':'string'}
-    train_data_dir = path.train_data_dir
+    project_name += ""  # @param {type:"string"}
+    output_dir = path.output_dir + ""  # @param {'type':'string'}
+    train_data_dir = path.train_data_dir + ""
 
     print("Project Name: ", project_name)
     print("Model Version: Stable Diffusion V1.x") if not v2 else ""

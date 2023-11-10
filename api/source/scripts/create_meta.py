@@ -4,7 +4,7 @@ from scripts.utils import path, util
 def set_config():
     train_data_dir = path.train_data_dir
     # @markdown Merge tags and/or captions exist in `train_data_dir` into one metadata JSON file, which will be used as the input for the bucketing section.
-    metadata = path.config_dir + "/meta_clean.json"
+    metadata = path.metadata_file
     # @markdown Use `recursive` option to process subfolders as well
     recursive = False
     # @markdown Use `clean_caption` option to clean such as duplicate tags, `women` to `girl`, etc

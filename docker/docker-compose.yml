@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   profile_server:
-    image : profile_server:1.0.1
+    image : profile_server_test:1.0.2
     build:
       context: ../
       dockerfile: ./docker/Dockerfile
@@ -10,7 +10,7 @@ services:
     volumes:
       - D:\docker\volume:/vol
       - ../:/root/AiProfileAPI
-    container_name: AiProfileServer
+    container_name: AiProfileServerTest
     privileged: true
     restart: unless-stopped
     #아래 두 옵션은 서버 계속 돌아가게 설정한 후 제거, 지금은 실행되는게 없으므로 생성 후 바로 exit 0 뱉으며 정상 종료됨.
