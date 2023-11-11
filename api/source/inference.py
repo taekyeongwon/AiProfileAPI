@@ -1,7 +1,7 @@
-from scripts import gen_image
+from scripts import generate_image
 
 try:
-    gen_image.execute()
+    generate_image.execute()
 except Exception as e:
     print(e)
 else:

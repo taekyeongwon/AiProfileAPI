@@ -6,9 +6,9 @@ venv
 build
 .vscode
 wandb
-api/train_data_dir/
-api/output_dir/
-api/logs/
-api/pretrained_model/
-api/result/
-api/config_finetune/user/
+api/train_data_dir/*
+api/output_dir/*
+api/logs/*
+api/pretrained_model/*
+api/result/*
+api/config_finetune/user/*

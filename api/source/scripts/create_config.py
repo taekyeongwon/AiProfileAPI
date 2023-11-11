@@ -4,7 +4,7 @@ from scripts.utils import path, util
 #5.1 Model Config
 v2 = False  # @param {type:"boolean"}
 v_parameterization = False  # @param {type:"boolean"}
-project_name = "chillout_1000"  # @param {type:"string"}
+project_name = "ai_profile"  # @param {type:"string"}
 pretrained_model_name_or_path = path.model_dir  # @param {type:"string"}
 vae = ""  # @param {type:"string"}
 output_dir = path.output_dir  # @param {'type':'string'}

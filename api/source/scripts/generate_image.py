@@ -3,7 +3,7 @@ from scripts.utils import path, util
 
 # @markdown ### LoRA Config
 # @markdown Currently, `LoHa` and `LoCon_Lycoris` are not supported. Please run `Portable Web UI` instead
-network_weight = path.output_dir + "/chillout_1000.safetensors"  # @param {'type':'string'}
+network_weight = path.output_dir + "/ai_profile.safetensors"  # @param {'type':'string'}
 network_mul = 0.7  # @param {type:"slider", min:-1, max:2, step:0.05}
 network_module = "networks.lora"
 network_args = ""
