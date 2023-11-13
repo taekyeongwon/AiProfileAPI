@@ -1,10 +1,10 @@
 FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04
 LABEL maintainer="tkw3351@gmail.com"
-LABEL version="1.0.2"
+LABEL version="1.0.3"
 
 # 기본 패키지 설치와 필요한 패키지만 설치
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    python3 python3-pip vim sudo\
+    python3 python3-pip vim sudo aria2\
     locales language-pack-ko \
     libgl1-mesa-glx libglib2.0-0 && \
     apt-get clean && \
@@ -18,12 +18,19 @@ ENV LC_ALL=ko_KR.UTF-8
 # 캐싱 이용하기 위해 먼저 다운로드
 RUN pip install torch==2.0.1+cu118 torchvision==0.15.2+cu118 --index-url https://download.pytorch.org/whl/cu118
 RUN pip install xformers==0.0.20
+#RUN pip install torch==2.0.0+cu118 torchvision==0.15.1+cu118 torchaudio==2.0.1+cu118 torchtext==0.15.1 torchdata==0.6.0 --extra-index-url https://download.pytorch.org/whl/cu118 -U
+#RUN pip install xformers==0.0.19 triton==2.0.0 -U
 
 #requirements 복사
 RUN mkdir -p /root/AiProfileAPI
 WORKDIR /root/AiProfileAPI/
 COPY ../requirements.txt .
 COPY ../setup.py .
+
+#RUN apt update && apt-get install -y git
+#WORKDIR /root
+#RUN git clone https://github.com/Linaqruf/kohya-trainer
+#WORKDIR /root/kohya-trainer
 
 #의존성 설치. COPY 레이어에서 수정이 발생되면 캐시 동작 안하고 아래 작업 수행
 RUN pip install --upgrade -r requirements.txt
