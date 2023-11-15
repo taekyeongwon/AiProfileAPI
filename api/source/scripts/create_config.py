@@ -4,14 +4,14 @@ from scripts.utils import path, util
 #5.1 Model Config
 v2 = False  # @param {type:"boolean"}
 v_parameterization = False  # @param {type:"boolean"}
-project_name = "ai_profile"  # @param {type:"string"}
+project_name = "ai_profile_" + os.getenv("USER_ID") # @param {type:"string"}
 pretrained_model_name_or_path = path.model_dir  # @param {type:"string"}
 vae = ""  # @param {type:"string"}
 output_dir = path.output_dir  # @param {'type':'string'}
 train_data_dir = path.train_data_dir
 
 #5.2 Dataset Config
-dataset_repeats = 20  # @param {type:"number"}
+dataset_repeats = 40  # @param {type:"number"}
 in_json = path.latents_file  # @param {type:"string"}
 resolution = "512,512" # @param ["512,512", "768,768"]
 keep_tokens = 0  # @param {type:"number"}
@@ -78,7 +78,7 @@ train_batch_size = 1  # @param {type:"number"}
 mixed_precision = "fp16"  # @param ["no","fp16","bf16"] {allow-input: false}
 save_precision = "fp16"  # @param ["float", "fp16", "bf16"] {allow-input: false}
 save_n_epochs_type = "save_every_n_epochs"  # @param ["save_every_n_epochs", "save_n_epoch_ratio"] {allow-input: false}
-save_n_epochs_type_value = 1  # @param {type:"number"}
+save_n_epochs_type_value = 5  # @param {type:"number"}
 save_model_as = "safetensors"  # @param ["ckpt", "pt", "safetensors"] {allow-input: false}
 max_token_length = 225  # @param {type:"number"}
 clip_skip = 2  # @param {type:"number"}
@@ -88,16 +88,9 @@ seed = -1  # @param {type:"number"}
 logging_dir = path.log_dir
 prior_loss_weight = 1.0
 
+
 #5.1
 def model_config():
-    global project_name
-    global output_dir
-    global train_data_dir
-
-    project_name += ""  # @param {type:"string"}
-    output_dir = path.output_dir + ""  # @param {'type':'string'}
-    train_data_dir = path.train_data_dir + ""
-
     print("Project Name: ", project_name)
     print("Model Version: Stable Diffusion V1.x") if not v2 else ""
     print("Model Version: Stable Diffusion V2.x") if v2 and not v_parameterization else ""
@@ -164,9 +157,6 @@ def lora_config():
 
 #5.4
 def training_config():
-    global logging_dir
-    logging_dir = path.log_dir
-
     config = {
         "model_arguments": {
             "v2": v2,
@@ -240,6 +230,8 @@ def training_config():
             "log_prefix": project_name,
             "noise_offset": noise_offset if noise_offset > 0 else None,
             "lowram": lowram,
+            #"full_fp16": True
+            #"no_half_vae": True
         },
         "sample_prompt_arguments": {
             "sample_every_n_steps": None,

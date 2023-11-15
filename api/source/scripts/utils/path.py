@@ -1,22 +1,24 @@
 import os
 
-root_dir = "/root/AiProfileAPI"
-repo_dir = os.path.join(root_dir, "api")
-finetune_dir = root_dir + "/finetune"
-train_data_dir = repo_dir + "/train_data_dir"
+root_dir = os.getenv("ROOT_DIR")
+repo_dir = os.getenv("REPO_DIR")
+user_dir = os.getenv("USER_DIR")
+config_dir = os.getenv("CONFIG_DIR")
+finetune_dir = os.getenv("FINETUNE_DIR")
 
-config_dir = repo_dir + "/config_finetune"
-accelerate_config = config_dir + "/config.yaml"
-config_file = config_dir + "/user/config_file.toml"
+accelerate_config = os.getenv("ACCELERATE_CONFIG")
+config_file = os.getenv("CONFIG_FILE")
 #dataset_config = config_dir + "/dataset_config.toml"
-metadata_file = config_dir + "/user/meta_clean.json"
-latents_file = config_dir + "/user/meta_lat.json"
-prompt_file = config_dir + "/prompts.txt"
+prompt_file = os.getenv("PROMPT_FILE")
 
-model_dir = repo_dir + "/pretrained_model/chilloutmix_NiPrunedFp16Fix.safetensors"
+model_dir = os.getenv("MODEL_DIR")
+#model_dir = "runwayml/stable-diffusion-v1-5"
 
+train_data_dir = os.getenv("TRAIN_DATA_DIR")
+metadata_file = os.getenv("METADATA_FILE")
+latents_file = os.getenv("LATENTS_FILE")
 #trained model output dir
-output_dir = repo_dir + "/output_dir"
-log_dir = repo_dir + "/logs"
+output_dir = os.getenv("OUTPUT_DIR")
+log_dir = os.getenv("LOG_DIR")
 #inference image output dir
-result_dir = repo_dir + "/result"
+result_dir = os.getenv("RESULT_DIR")

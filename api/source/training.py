@@ -15,6 +15,6 @@ try:
     #5.5 Start Training
     do_train.execute()
 except Exception as e:
-    print(e)
+    raise Exception("training error", e)
 else:
     print("\ntraining done.")

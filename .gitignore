@@ -12,3 +12,4 @@ api/logs/*
 api/pretrained_model/*
 api/result/*
 api/config_finetune/user/*
+api/tmp
