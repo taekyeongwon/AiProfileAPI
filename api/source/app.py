@@ -1,5 +1,4 @@
 import os, subprocess, shutil
-from distutils.dir_util import copy_tree
 
 user_id = "test"
 root_dir = "/root/AiProfileAPI"
@@ -16,13 +15,13 @@ path = {
         'FINETUNE_DIR' : root_dir + "/finetune",
 
         'ACCELERATE_CONFIG' : config_dir + "/config.yaml",
-        'CONFIG_FILE' : config_dir + "/config_file.toml",
         #dataset_config = config_dir + "/dataset_config.toml"
         'PROMPT_FILE' : config_dir + "/prompts.txt",
 
         'MODEL_DIR' : repo_dir + "/pretrained_model/chilloutmix_NiPrunedFp16Fix.safetensors",
         #model_dir = "runwayml/stable-diffusion-v1-5"
-
+        
+        'CONFIG_FILE' : user_dir + "/config_file.toml",
         'TRAIN_DATA_DIR' : user_dir + "/train_data_dir",
         'METADATA_FILE' : user_dir + "/meta_clean.json",
         'LATENTS_FILE' : user_dir + "/meta_lat.json",
@@ -41,7 +40,7 @@ if not os.path.exists(user_dir):
     os.makedirs(path['OUTPUT_DIR'])
     os.makedirs(path['LOG_DIR'])
     os.makedirs(path['RESULT_DIR'])
-    copy_tree(path['REPO_DIR']+"/train_data_dir/", path['TRAIN_DATA_DIR'])
+    shutil.copytree(path['REPO_DIR']+"/train_data_dir/", path['TRAIN_DATA_DIR'], dirs_exist_ok=True)
 
 try:
     subprocess.run("python3 training.py", shell=True, check=True, env=os.environ)

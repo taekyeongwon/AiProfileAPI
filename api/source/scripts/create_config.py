@@ -11,7 +11,7 @@ output_dir = path.output_dir  # @param {'type':'string'}
 train_data_dir = path.train_data_dir
 
 #5.2 Dataset Config
-dataset_repeats = 40  # @param {type:"number"}
+dataset_repeats = 80  # @param {type:"number"}
 in_json = path.latents_file  # @param {type:"string"}
 resolution = "512,512" # @param ["512,512", "768,768"]
 keep_tokens = 0  # @param {type:"number"}
@@ -83,7 +83,7 @@ save_model_as = "safetensors"  # @param ["ckpt", "pt", "safetensors"] {allow-inp
 max_token_length = 225  # @param {type:"number"}
 clip_skip = 2  # @param {type:"number"}
 gradient_checkpointing = False  # @param {type:"boolean"}
-gradient_accumulation_steps = 1  # @param {type:"number"}
+gradient_accumulation_steps = 2  # @param {type:"number"}
 seed = -1  # @param {type:"number"}
 logging_dir = path.log_dir
 prior_loss_weight = 1.0

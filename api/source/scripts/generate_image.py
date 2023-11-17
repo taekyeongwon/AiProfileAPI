@@ -3,7 +3,8 @@ from scripts.utils import path, util
 
 # @markdown ### LoRA Config
 # @markdown Currently, `LoHa` and `LoCon_Lycoris` are not supported. Please run `Portable Web UI` instead
-network_weight = path.output_dir + "/ai_profile.safetensors"  # @param {'type':'string'}
+user_id = os.getenv("USER_ID")
+network_weight = path.output_dir + f"/ai_profile_{user_id}.safetensors"  # @param {'type':'string'}
 network_mul = 0.7  # @param {type:"slider", min:-1, max:2, step:0.05}
 network_module = "networks.lora"
 network_args = ""
@@ -58,7 +59,7 @@ config = {
 }
 
 def execute():
-    print("\nimage infernece start.....-----------------------------------------------\n")
+    print("\nimage inference start.....-----------------------------------------------\n")
     args = util.train(config)
     final_args = f"python3 gen_img_diffusers.py {args}"
     os.chdir(path.root_dir)
