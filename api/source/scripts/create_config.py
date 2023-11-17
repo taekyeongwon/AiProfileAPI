@@ -11,7 +11,7 @@ output_dir = path.output_dir  # @param {'type':'string'}
 train_data_dir = path.train_data_dir
 
 #5.2 Dataset Config
-dataset_repeats = 80  # @param {type:"number"}
+dataset_repeats = 40  # @param {type:"number"}
 in_json = path.latents_file  # @param {type:"string"}
 resolution = "512,512" # @param ["512,512", "768,768"]
 keep_tokens = 0  # @param {type:"number"}
@@ -230,7 +230,7 @@ def training_config():
             "log_prefix": project_name,
             "noise_offset": noise_offset if noise_offset > 0 else None,
             "lowram": lowram,
-            #"full_fp16": True
+            #"full_fp16": True,
             #"no_half_vae": True
         },
         "sample_prompt_arguments": {

@@ -2,18 +2,22 @@ FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04
 LABEL maintainer="tkw3351@gmail.com"
 LABEL version="1.0.3"
 
+ARG DEBIAN_FRONTEND=noninteractive
+
 # 기본 패키지 설치와 필요한 패키지만 설치
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    python3 python3-pip vim sudo aria2\
+    python3 python3-pip vim aria2 tzdata\
     locales language-pack-ko \
     libgl1-mesa-glx libglib2.0-0 && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
-RUN sudo ln -snf /usr/share/zoneinfo/Asia/Seoul /etc/localtime
 RUN locale-gen ko_KR.utf8
 
 # 한국어 설정
 ENV LC_ALL=ko_KR.UTF-8
+
+#시간 설정
+ENV TZ=Asia/Seoul
 
 # 캐싱 이용하기 위해 먼저 다운로드
 RUN pip install torch==2.0.1+cu118 torchvision==0.15.2+cu118 --index-url https://download.pytorch.org/whl/cu118
