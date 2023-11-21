@@ -5,6 +5,7 @@ root_dir = "/root/AiProfileAPI"
 repo_dir = root_dir + "/api"
 user_dir = repo_dir + f"/tmp/{user_id}"
 config_dir = repo_dir + "/config_finetune"
+custom_tag = f"sks {user_id}"
 
 path = {
         'USER_ID' : user_id,
@@ -14,12 +15,16 @@ path = {
         'CONFIG_DIR' : config_dir,
         'FINETUNE_DIR' : root_dir + "/finetune",
 
+        'CUSTOM_TAG': custom_tag,
+
         'ACCELERATE_CONFIG' : config_dir + "/config.yaml",
         #dataset_config = config_dir + "/dataset_config.toml"
-        'PROMPT_FILE' : config_dir + "/prompts.txt",
+        #'PROMPT_FILE' : config_dir + "/prompts.txt",
+        'PROMPT' : f"{custom_tag}, 1girl, solo, ultra-detailed, close-up, straight on, face focus, looking at viewer, short hair, bangs, simple background, shirt, black hair, white background, brown eyes, black eyes, lips, portrait, realistic",
+        'NG_PROMPT' : "lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, username, blurry, nsfw",
 
-        'MODEL_DIR' : repo_dir + "/pretrained_model/chilloutmix_NiPrunedFp16Fix.safetensors",
-        #model_dir = "runwayml/stable-diffusion-v1-5"
+        'MODEL_DIR' : repo_dir + "/pretrained_model/chilloutmix_v10.ckpt",
+        #'MODEL_DIR' : "runwayml/stable-diffusion-v1-5",
         
         'CONFIG_FILE' : user_dir + "/config_file.toml",
         'TRAIN_DATA_DIR' : user_dir + "/train_data_dir",

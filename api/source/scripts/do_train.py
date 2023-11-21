@@ -19,6 +19,7 @@ def execute():
     os.chdir(path.root_dir)
     print(f"train_network.py execute time :: {now.strftime('%Y-%m-%d %H:%M:%S')}")
     try:
-        subprocess.run(final_args, shell=True, check=True)
+        os.system(final_args)
+        #subprocess.run(final_args, shell=True, check=True)
     except Exception as e:
         raise Exception('training error !!!', e)

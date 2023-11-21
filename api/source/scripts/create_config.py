@@ -11,7 +11,7 @@ output_dir = path.output_dir  # @param {'type':'string'}
 train_data_dir = path.train_data_dir
 
 #5.2 Dataset Config
-dataset_repeats = 40  # @param {type:"number"}
+dataset_repeats = 50  # @param {type:"number"}
 in_json = path.latents_file  # @param {type:"string"}
 resolution = "512,512" # @param ["512,512", "768,768"]
 keep_tokens = 0  # @param {type:"number"}
@@ -57,10 +57,10 @@ train_unet = True  # @param {'type':'boolean'}
 unet_lr = 1e-4  # @param {'type':'number'}
 train_text_encoder = True  # @param {'type':'boolean'}
 text_encoder_lr = 5e-5  # @param {'type':'number'}
-lr_scheduler = "constant"  # @param ["linear", "cosine", "cosine_with_restarts", "polynomial", "constant", "constant_with_warmup", "adafactor"] {allow-input: false}
-lr_warmup_steps = 0  # @param {'type':'number'}
+lr_scheduler = "cosine_with_restarts"  # @param ["linear", "cosine", "cosine_with_restarts", "polynomial", "constant", "constant_with_warmup", "adafactor"] {allow-input: false}
+lr_warmup_steps = 10  # @param {'type':'number'}
 # @markdown You can define `num_cycles` value for `cosine_with_restarts` or `power` value for `polynomial` in the field below.
-lr_scheduler_num_cycles = 0  # @param {'type':'number'}
+lr_scheduler_num_cycles = 2  # @param {'type':'number'}
 lr_scheduler_power = 0  # @param {'type':'number'}
 
 if network_category == "LoHa":
@@ -83,7 +83,7 @@ save_model_as = "safetensors"  # @param ["ckpt", "pt", "safetensors"] {allow-inp
 max_token_length = 225  # @param {type:"number"}
 clip_skip = 2  # @param {type:"number"}
 gradient_checkpointing = False  # @param {type:"boolean"}
-gradient_accumulation_steps = 2  # @param {type:"number"}
+gradient_accumulation_steps = 1  # @param {type:"number"}
 seed = -1  # @param {type:"number"}
 logging_dir = path.log_dir
 prior_loss_weight = 1.0
@@ -230,6 +230,7 @@ def training_config():
             "log_prefix": project_name,
             "noise_offset": noise_offset if noise_offset > 0 else None,
             "lowram": lowram,
+            "cache_latents": True,
             #"full_fp16": True,
             #"no_half_vae": True
         },

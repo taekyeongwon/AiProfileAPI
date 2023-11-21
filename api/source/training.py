@@ -1,9 +1,11 @@
-from scripts import generate_tag, create_meta, prepare_buckets_latents, create_config, do_train
+from scripts import generate_tag, custom_tag, create_meta, prepare_buckets_latents, create_config, do_train
 
 try:
     #4. Data Processing
     #4.2.2 Waifu Diffusion 1.4 Tagger V2
     generate_tag.execute()
+    #4.2.3 Custom Caption/Tag
+    custom_tag.execute()
     #4.3 Create Metadata File
     create_meta.execute()
     #4.4 Bucketing and Latents Caching

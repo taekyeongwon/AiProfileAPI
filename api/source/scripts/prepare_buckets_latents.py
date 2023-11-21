@@ -39,6 +39,7 @@ def execute():
     final_args = f"python3 prepare_buckets_latents.py {args}"
     os.chdir(path.finetune_dir)
     try:
-        subprocess.run(final_args, shell=True, check=True)
+        os.system(final_args)
+        #subprocess.run(final_args, shell=True, check=True)
     except Exception as e:
         raise Exception('prepare buckets and latents error !!!', e)

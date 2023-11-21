@@ -24,6 +24,7 @@ def execute():
     final_args = f"python3 merge_dd_tags_to_metadata.py {args}"
     os.chdir(path.finetune_dir)
     try:
-        subprocess.run(final_args, shell=True, check=True)
+        os.system(final_args)
+        #subprocess.run(final_args, shell=True, check=True)
     except Exception as e:
         raise Exception('create metadata error !!!', e)

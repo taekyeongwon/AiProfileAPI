@@ -14,6 +14,8 @@ v2 = False  # @param {type:"boolean"}
 v_parameterization = False  # @param {type:"boolean"}
 #prompt = "tiu, 1girl, solo, looking at viewer, short hair, bangs, simple background, shirt, black hair, white background, brown eyes, jewelry, earrings, black eyes, lips, black shirt, traditional media, portrait, realistic"  # @param {type: "string"}
 #negative = "low quality, lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, username, blurry"  # @param {type: "string"}
+prompt = os.getenv('PROMPT')
+negative = os.getenv('NG_PROMPT')
 model = path.model_dir # @param {type: "string"}
 vae = ""  # @param {type: "string"}
 outdir = path.result_dir  # @param {type: "string"}
@@ -28,8 +30,8 @@ batch_size = 4  # @param {type: "integer"}
 clip_skip = 2  # @param {type: "slider", min: 1, max: 40}
 seed = -1  # @param {type: "integer"}
 
-#final_prompt = f"{prompt} --n {negative}"
-final_prompt = path.prompt_file
+final_prompt = f"{prompt} --n {negative}"
+#final_prompt = path.prompt_file
 
 config = {
     "v2": v2,
@@ -54,8 +56,8 @@ config = {
     "batch_size": batch_size,
     "images_per_prompt": images_per_prompt,
     "clip_skip": clip_skip if not v2 else None,
-    #"prompt": final_prompt,
-    "from_file": final_prompt
+    "prompt": final_prompt,
+    #"from_file": final_prompt
 }
 
 def execute():
@@ -64,6 +66,7 @@ def execute():
     final_args = f"python3 gen_img_diffusers.py {args}"
     os.chdir(path.root_dir)
     try:
-        subprocess.run(final_args, shell=True, check=True)
+        os.system(final_args)
+        #subprocess.run(final_args, shell=True, check=True)
     except Exception as e:
         raise Exception('image inference error !!!', e)
