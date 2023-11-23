@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   profile_server:
-    image : profile_server:1.0.3
+    image : profile_server:1.0.4
     build:
       context: ../
       dockerfile: ./docker/Dockerfile

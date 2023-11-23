@@ -1,6 +1,6 @@
 FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04
 LABEL maintainer="tkw3351@gmail.com"
-LABEL version="1.0.3"
+LABEL version="1.0.4"
 
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -20,21 +20,17 @@ ENV LC_ALL=ko_KR.UTF-8
 ENV TZ=Asia/Seoul
 
 # 캐싱 이용하기 위해 먼저 다운로드
+RUN pip install fastapi
+RUN pip install uvicorn
+RUN pip install python-multipart
 RUN pip install torch==2.0.1+cu118 torchvision==0.15.2+cu118 --index-url https://download.pytorch.org/whl/cu118
 RUN pip install xformers==0.0.20
-#RUN pip install torch==2.0.0+cu118 torchvision==0.15.1+cu118 torchaudio==2.0.1+cu118 torchtext==0.15.1 torchdata==0.6.0 --extra-index-url https://download.pytorch.org/whl/cu118 -U
-#RUN pip install xformers==0.0.19 triton==2.0.0 -U
 
 #requirements 복사
 RUN mkdir -p /root/AiProfileAPI
 WORKDIR /root/AiProfileAPI/
 COPY ../requirements.txt .
 COPY ../setup.py .
-
-#RUN apt update && apt-get install -y git
-#WORKDIR /root
-#RUN git clone https://github.com/Linaqruf/kohya-trainer
-#WORKDIR /root/kohya-trainer
 
 #의존성 설치. COPY 레이어에서 수정이 발생되면 캐시 동작 안하고 아래 작업 수행
 RUN pip install --upgrade -r requirements.txt
@@ -53,3 +49,7 @@ RUN apt-get autoremove -y && \
 
 # 불필요한 캐시 및 로그 파일 제거
 RUN rm -rf /var/log/* /var/cache/apt/* /root/.cache
+
+# api 실행
+WORKDIR /root/AiProfileAPI/api/source
+CMD uvicorn apitest:api --reload --host=0.0.0.0 --port=80

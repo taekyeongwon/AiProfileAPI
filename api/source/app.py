@@ -49,7 +49,7 @@ if not os.path.exists(user_dir):
     shutil.copytree(path['REPO_DIR']+"/train_data_dir/", path['TRAIN_DATA_DIR'], dirs_exist_ok=True)
 
 try:
-    #subprocess.run("python3 training.py", shell=True, check=True, env=os.environ)
+    subprocess.run("python3 training.py", shell=True, check=True, env=os.environ)
     subprocess.run("python3 inference.py", shell=True, check=True, env=os.environ)
 except Exception as e:
     print(e)
