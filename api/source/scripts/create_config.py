@@ -11,7 +11,7 @@ output_dir = path.output_dir  # @param {'type':'string'}
 train_data_dir = path.train_data_dir
 
 #5.2 Dataset Config
-dataset_repeats = 50  # @param {type:"number"}
+dataset_repeats = 40  # @param {type:"number"}
 in_json = path.latents_file  # @param {type:"string"}
 resolution = "512,512" # @param ["512,512", "768,768"]
 keep_tokens = 0  # @param {type:"number"}
@@ -45,7 +45,7 @@ network_args = "" if network_category == "LoRA" else [
     ]
 # @markdown ### <br>Optimizer Config:
 # @markdown `NEW` Gamma for reducing the weight of high-loss timesteps. Lower numbers have a stronger effect. The paper recommends 5. Read the paper [here](https://arxiv.org/abs/2303.09556).
-min_snr_gamma = -1 #@param {type:"number"}
+min_snr_gamma = 5 #@param {type:"number"}
 # @markdown `AdamW8bit` was the old `--use_8bit_adam`.
 optimizer_type = "AdamW8bit"  # @param ["AdamW", "AdamW8bit", "Lion", "SGDNesterov", "SGDNesterov8bit", "DAdaptation", "AdaFactor"]
 # @markdown Additional arguments for optimizer, e.g: `["decouple=True","weight_decay=0.6"]`
@@ -81,7 +81,7 @@ save_n_epochs_type = "save_every_n_epochs"  # @param ["save_every_n_epochs", "sa
 save_n_epochs_type_value = 5  # @param {type:"number"}
 save_model_as = "safetensors"  # @param ["ckpt", "pt", "safetensors"] {allow-input: false}
 max_token_length = 225  # @param {type:"number"}
-clip_skip = 2  # @param {type:"number"}
+clip_skip = 1  # @param {type:"number"}
 gradient_checkpointing = False  # @param {type:"boolean"}
 gradient_accumulation_steps = 1  # @param {type:"number"}
 seed = -1  # @param {type:"number"}

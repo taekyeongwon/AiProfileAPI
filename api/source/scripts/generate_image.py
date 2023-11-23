@@ -66,7 +66,6 @@ def execute():
     final_args = f"python3 gen_img_diffusers.py {args}"
     os.chdir(path.root_dir)
     try:
-        os.system(final_args)
-        #subprocess.run(final_args, shell=True, check=True)
+        subprocess.run(final_args, shell=True, check=True)
     except Exception as e:
         raise Exception('image inference error !!!', e)

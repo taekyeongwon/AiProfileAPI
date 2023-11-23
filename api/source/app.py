@@ -21,6 +21,7 @@ path = {
         #dataset_config = config_dir + "/dataset_config.toml"
         #'PROMPT_FILE' : config_dir + "/prompts.txt",
         'PROMPT' : f"{custom_tag}, 1girl, solo, ultra-detailed, close-up, straight on, face focus, looking at viewer, short hair, bangs, simple background, shirt, black hair, white background, brown eyes, black eyes, lips, portrait, realistic",
+        #'PROMPT' : f"1girl",
         'NG_PROMPT' : "lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, username, blurry, nsfw",
 
         'MODEL_DIR' : repo_dir + "/pretrained_model/chilloutmix_v10.ckpt",
@@ -48,7 +49,7 @@ if not os.path.exists(user_dir):
     shutil.copytree(path['REPO_DIR']+"/train_data_dir/", path['TRAIN_DATA_DIR'], dirs_exist_ok=True)
 
 try:
-    subprocess.run("python3 training.py", shell=True, check=True, env=os.environ)
+    #subprocess.run("python3 training.py", shell=True, check=True, env=os.environ)
     subprocess.run("python3 inference.py", shell=True, check=True, env=os.environ)
 except Exception as e:
     print(e)

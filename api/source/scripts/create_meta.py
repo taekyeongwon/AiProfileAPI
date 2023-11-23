@@ -21,10 +21,10 @@ def set_config():
 def execute():
     print("\ncreate metadata file.....-------------------------------------------------\n")
     args = util.train(set_config())
+    #final_args = f"python3 merge_captions_to_metadata.py {args}"
     final_args = f"python3 merge_dd_tags_to_metadata.py {args}"
     os.chdir(path.finetune_dir)
     try:
-        os.system(final_args)
-        #subprocess.run(final_args, shell=True, check=True)
+        subprocess.run(final_args, shell=True, check=True)
     except Exception as e:
         raise Exception('create metadata error !!!', e)

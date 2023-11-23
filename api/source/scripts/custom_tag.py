@@ -38,6 +38,7 @@ def process_tags(filename, custom_tag, append, remove_tag):
 
     contents = ', '.join(tags)
     write_file(filename, contents)
+    print(f"custom tag : {contents}")
 
 def process_directory(image_dir, tag, append, remove_tag, recursive):
     for filename in os.listdir(image_dir):
@@ -59,7 +60,10 @@ if not any(
             ).close()
 
 def execute():
+    print("\nappend custom tag.....-------------------------------------------------\n")
     tag = custom_tag
 
     if custom_tag:
         process_directory(image_dir, tag, append, remove_tag, recursive)
+
+    print("custom tag done.")
