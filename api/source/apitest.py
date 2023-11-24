@@ -1,7 +1,17 @@
-from fastapi import FastAPI, UploadFile
-import os
+from fastapi import FastAPI, UploadFile, BackgroundTasks
+import os, subprocess
 
 api = FastAPI()
+
+import FileController
+from typing import List
+
+
+@api.post("/upload/{user_id}")
+async def upload_photo(files: List[UploadFile], user_id: str, background_tasks: BackgroundTasks):
+    tmp_env = FileController.upload_file(files, user_id)
+    #background_tasks.add_task(test)
+    return {"tmp_env": tmp_env}
 
 @api.get('/random_number')
 def random_no():
