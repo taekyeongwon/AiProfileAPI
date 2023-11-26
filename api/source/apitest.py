@@ -1,17 +1,30 @@
-from fastapi import FastAPI, UploadFile, BackgroundTasks
+from fastapi import FastAPI, UploadFile, BackgroundTasks, Request
 import os, subprocess
+from fastapi.responses import JSONResponse
 
 api = FastAPI()
 
 import FileController
 from typing import List
+from scripts.errors.exceptions import APIException
+from scripts.errors import exceptions as ex
 
+@api.exception_handler(APIException)
+async def custom_exception_handler(request: Request, exception: APIException):
+    return JSONResponse(
+            status_code=exception.status_code,
+            content={"result_code":exception.code, "desc":exception.msg}
+    )
 
 @api.post("/upload/{user_id}")
 async def upload_photo(files: List[UploadFile], user_id: str, background_tasks: BackgroundTasks):
-    tmp_env = FileController.upload_file(files, user_id)
-    #background_tasks.add_task(test)
-    return {"tmp_env": tmp_env}
+    try:
+        tmp_env = FileController.upload_file(files, user_id)
+        #background_tasks.add_task(test)
+    except APIException as e:
+        raise e
+
+    return {"tmp_env": tmp_env} #todo : 성공으로 떨굴 때도 BaseResponse 규격에 맞춰서 주기. Response 객체랑 같이 JSONResponse 생성하는 함수 만들기
 
 @api.get('/random_number')
 def random_no():

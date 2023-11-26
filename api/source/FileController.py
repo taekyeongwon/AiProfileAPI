@@ -2,6 +2,7 @@ import os, subprocess
 from typing import List
 from fastapi import UploadFile
 import time
+from scripts.errors import exceptions as ex
 
 def upload_file(files: List[UploadFile], user_id: str):
     path = set_environ(user_id) #각 프로세스 별 환경변수 세팅용
@@ -9,19 +10,18 @@ def upload_file(files: List[UploadFile], user_id: str):
     upload_dir = path['TRAIN_DATA_DIR']  # 이미지를 저장할 서버 경로
 
     for index, file in enumerate(files):
-        content = file.file.read() #여러 사진 읽어와서 유효한지 검사
+        content = file.file.read() #todo : 여러 사진 읽어와서 유효한지 검사, else에서 바로 raise하지 말고 어떤 파일들이 유효하지 않은지를 전달해야 함.
         if check_validate(content):
             filename = f"{user_id} ({index}).jpg"
             with open(os.path.join(upload_dir, filename), "wb") as fp:
                 fp.write(content)  # 서버 로컬 스토리지에 이미지 저장 (쓰기)
         else:
-            raise {}
+            raise ex.InvalidImageException()
 
     tmp_env = os.environ
     for key, value in path.items():
         tmp_env[key] = value
     
-    time.sleep(5)
     return tmp_env
 
 def set_environ(user_id):
@@ -72,5 +72,5 @@ def makedirs(user_dir):
         os.makedirs(user_dir + "/result")
 
 def check_validate(file):   #사진에 얼굴이 제대로 나왔는지 확인. 이미지 리사이징
-    return True
+    return False
 
